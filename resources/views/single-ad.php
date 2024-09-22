@@ -3,16 +3,12 @@
 declare(strict_types=1);
 
 loadPartials('header');
-
+loadPartials('navbar');
 /**
  * @var $students ;
  */
-//dd($students);
 ?>
 
-<body>
-
-<?php loadPartials('navbar'); ?>
 
 <div class="container my-5">
     <h2 class="mb-4">Student Profile</h2>
@@ -20,11 +16,14 @@ loadPartials('header');
         <div class="col-md-6">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h3 class="card-title"><?= $students->first_name . ' ' . $students->last_name?></h3>
-                    <p class="card-text"><strong>Date</strong> <?= $students->birth_date?></p>
-                    <p class="card-text"><strong>Course:</strong> <?= $students->course?></p>
-                    <p class="card-text"><strong>Scholarship:</strong> <?= $students->scholarship?></p>
-                    <p class="card-text"><strong>Registered:</strong> <?= $students->created_at?> </p>
+                    <h3 class="card-title"><?= $students->first_name . ' ' . $students->last_name ?></h3>
+                    <p class="card-text"><strong>Date:</strong> <?= $students->birth_date ?></p>
+                    <p class="card-text"><strong>Course:</strong> <?= $students->course ?></p>
+                    <p class="card-text"><strong>Scholarship:</strong> <?= $students->scholarship ?></p>
+                    <p class="card-text"><strong>Gender:</strong> <?= ucfirst($students->gender) ?></p>
+                    <p class="card-text"><strong>Email:</strong> <?= $students->email ?></p>
+                    <p class="card-text"><strong>Address:</strong> <?= $students->address ?></p>
+                    <p class="card-text"><strong>Registered:</strong> <?= $students->created_at ?> </p>
                 </div>
             </div>
         </div>
@@ -48,7 +47,9 @@ loadPartials('header');
                 <div class="card-body">
                     <h5 class="card-title">Performance Summary</h5>
                     <p class="card-text">
-                        John is a dedicated student with excellent performance in most subjects, especially in the field of artificial intelligence. He has participated in multiple hackathons and is a member of the university coding club.
+                        John is a dedicated student with excellent performance in most subjects, especially in the field
+                        of artificial intelligence. He has participated in multiple hackathons and is a member of the
+                        university coding club.
                     </p>
                     <p class="card-text">
                         <strong>Achievements:</strong>
@@ -62,5 +63,4 @@ loadPartials('header');
             </div>
         </div>
     </div>
-<?php loadPartials('footer'); ?>
-
+    <?php loadPartials('footer'); ?>

@@ -3,16 +3,12 @@
 declare(strict_types=1);
 
 loadPartials('header');
-
+loadPartials('navbar');
 /**
  * @var $students ;
  */
-//dd($students);
 ?>
 
-<body>
-
-<?php loadPartials('navbar'); ?>
 
 <!-- Main Content -->
 <div class="container my-5">
@@ -29,6 +25,9 @@ loadPartials('header');
                         <p class="card-text"><strong>Date:</strong> <?= $student->birth_date ?></p>
                         <p class="card-text"><strong>Course:</strong> <?= $student->course ?></p>
                         <p class="card-text"><strong>Scholarship:</strong> <?= $student->scholarship ?></p>
+                        <p class="card-text"><strong>Gender:</strong> <?= ucfirst($student->gender) ?></p>
+                        <p class="card-text"><strong>Email:</strong> <?= $student->email ?></p>
+                        <p class="card-text"><strong>Address:</strong> <?= $student->address ?></p>
                     </div>
                     <div class="card-footer text-muted">
                         <?= $student->created_at ?>

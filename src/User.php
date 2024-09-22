@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
-use Cassandra\Date;
 use PDO;
+use Exception;
 
 class User
 {
@@ -30,7 +30,6 @@ class User
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-
         return $stmt->fetch();
     }
 
@@ -43,18 +42,37 @@ class User
         return $stmt->fetchAll();
     }
 
-    public function createStudent(string $firstName, string $lastName, $birthDate, int $course, int $scholarship): bool
+    /**
+     * @throws Exception
+     */
+    public function createStudent(
+        string $firstName,
+        string $lastName,
+               $birthDate,
+        int    $course,
+        ?int   $scholarship,
+        string $email,
+        string $address,
+        string $gender
+    ): bool
     {
-        $query = "INSERT INTO students (`first_name`, `last_name`, `birth_date`, `course`, `scholarship`, `created_at`)
-              VALUES (:first_name, :last_name, :birth_date, :course, :scholarship, NOW())";
+        $gender = trim($gender);
+        if ($gender !== 'Erkak' && $gender !== 'Ayol') {
+            throw new Exception("Invalid gender value: $gender");
+        }
+
+        $query = "INSERT INTO students (`first_name`, `last_name`, `birth_date`, `course`, `scholarship`, `email`, `address`, `gender`, `created_at`)
+                  VALUES (:first_name, :last_name, :birth_date, :course, :scholarship, :email, :address, :gender, NOW())";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':first_name', $firstName);
         $stmt->bindParam(':last_name', $lastName);
         $stmt->bindParam(':birth_date', $birthDate);
         $stmt->bindParam(':course', $course);
         $stmt->bindParam(':scholarship', $scholarship);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':address', $address);
+        $stmt->bindParam(':gender', $gender);
+
         return $stmt->execute();
     }
-
-
 }
